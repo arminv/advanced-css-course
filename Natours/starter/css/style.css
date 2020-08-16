@@ -62,13 +62,16 @@ body {
   position: absolute;
   top: 40%;
   left: 50%;
-  /* NOTE: this is to align the middles (of both axes) of the element to the middle of page: */
+  /* NOTE: this is to align the middles (of both axes) of the element to the middle of page - this is relative to the element itself: */
   transform: translate(-50%, -50%);
 }
 
 .heading-primary {
   color: #fff;
   text-transform: uppercase;
+
+  /* NOTE: sometimes at the end of animation there is a glitch, this gets rid of that 'bug': */
+  backface-visibility: hidden;
 }
 
 .heading-primary-main {
@@ -77,6 +80,15 @@ body {
   font-size: 60px;
   font-weight: 400;
   letter-spacing: 35px;
+
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+
+  /* 
+  animation-delay: 1s;
+  animation-iteration-count: 3;
+  */
 }
 
 .heading-primary-sub {
@@ -84,4 +96,38 @@ body {
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 17.4px;
+  animation: moveInRight 1s ease-out;
+}
+
+/* NOTE: for browser performance, it's best to animate only two properties (as they are optimized for these): 1) Opacity 2) Transform */
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  80% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  80% {
+    transform: translateX(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
