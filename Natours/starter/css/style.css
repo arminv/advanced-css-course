@@ -6,3 +6,41 @@ Medium green: #55c57a
 Dark green: #28b485
 
 */
+
+/* NOTE: * is the universal selector in CSS, so * {style} would apply to everything */
+* {
+  margin: 0;
+  padding: 0;
+  /* NOTE: This removes any padding,margin, etc. when we set the height/width of elements:  */
+  box-sizing: border-box;
+}
+
+body {
+  /* NOTE: font settings are usually inherited by all child elements, so we set them on the body: */
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  /* NOTE: it means 1.7 times bigger than the pre-defined height: */
+  line-height: 1.7;
+  color: #777;
+  padding: 30px;
+}
+
+.header {
+  height: 95vh;
+  /* NOTE: this is how we apply a gradient to our bg image (basically two images on top of each other!): */
+  /* NOTE: to right means start from top left and go to bottom right (to set the colors) */
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(126, 213, 111, 0.8),
+      rgba(40, 180, 131, 0.8)
+    ),
+    url(../img/hero.jpg);
+  /* NOTE: cover means try to cover the whole width of the viewport: */
+  background-size: cover;
+  /* NOTE: this ensures the bg image stays pinned to the top of the page: */
+  background-position: top;
+
+  /* NOTE: this is a modern css property that let's us cut off elements to get certain shapes: */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
