@@ -40,7 +40,48 @@ body {
   background-size: cover;
   /* NOTE: this ensures the bg image stays pinned to the top of the page: */
   background-position: top;
+  /* NOTE: because the child element (.logo-box) needs this to be relative (to act as the starting point): */
+  position: relative;
 
   /* NOTE: this is a modern css property that let's us cut off elements to get certain shapes: */
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+
+.logo-box {
+  /* NOTE: the position start is relative to the parent element (that should have 'position: relative;' set on it): */
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.logo {
+  height: 35px;
+}
+
+.text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  /* NOTE: this is to align the middles (of both axes) of the element to the middle of page: */
+  transform: translate(-50%, -50%);
+}
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.heading-primary-main {
+  /* NOTE: span is inline by default, to break into lines we make it a block element (to take up whole width): */
+  display: block;
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 35px;
+}
+
+.heading-primary-sub {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 17.4px;
 }
