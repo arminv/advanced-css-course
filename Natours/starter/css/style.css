@@ -135,6 +135,18 @@ body {
   }
 }
 
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
 /* NOTE: :link and :visited are a special pseudo classes for an anchor element (which our button is here):  */
 .btn:link,
 .btn:visited {
@@ -147,6 +159,8 @@ body {
   /* NOTE: transition can be used for simpler animations (for more complex use @keyframes): */
   /* NOTE: if not sure what properties to animate, use 'all' to animate all possible properties: */
   transition: all 0.2s;
+  /* NOTE: this is used by the ::after pseudo element (.btn::after). This makes .btn the reference element for the pseudo one: */
+  position: relative;
 }
 
 .btn:hover {
@@ -164,4 +178,37 @@ body {
 .btn-white {
   background-color: #fff;
   color: #777;
+}
+
+/* NOTE: ::after is a pseudo element. We create a btn exactly like the one we have and put it behind our btn: */
+.btn::after {
+  /* NOTE: content and diplay are MANDATORY for a ::after pseudo element to show on the page! */
+  content: '';
+  display: inline-block;
+  /* NOTE: a pseudo element is kind of treated as the child of the element. Here we set the size to be exactly the same as our btn element: */
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  /* NOTE: these put the pseudo element behind our element: */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn-animated {
+  /* NOTE: the last value is the delay: */
+  animation: moveInBottom 0.5s ease-out 0.75s;
+  /* NOTE: the styles at 0% keyframe will be applied (before the animation starts) if we use this: */
+  animation-fill-mode: backwards;
 }
