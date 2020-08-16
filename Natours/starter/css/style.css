@@ -64,6 +64,8 @@ body {
   left: 50%;
   /* NOTE: this is to align the middles (of both axes) of the element to the middle of page - this is relative to the element itself: */
   transform: translate(-50%, -50%);
+  /* NOTE: this is used to center the child element (i.e. the button - .btn): */
+  text-align: center;
 }
 
 .heading-primary {
@@ -72,6 +74,7 @@ body {
 
   /* NOTE: sometimes at the end of animation there is a glitch, this gets rid of that 'bug': */
   backface-visibility: hidden;
+  margin-bottom: 60px;
 }
 
 .heading-primary-main {
@@ -130,4 +133,35 @@ body {
     opacity: 1;
     transform: translate(0);
   }
+}
+
+/* NOTE: :link and :visited are a special pseudo classes for an anchor element (which our button is here):  */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  /* NOTE: because this element is inline-block, it will be treated as text so we can set text-align on its parent (.text-box) to center it! */
+  display: inline-block;
+  border-radius: 100px;
+  /* NOTE: transition can be used for simpler animations (for more complex use @keyframes): */
+  /* NOTE: if not sure what properties to animate, use 'all' to animate all possible properties: */
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  /* NOTE: the first value is offset from x-axis, second is offset from y-axis and third is the blur: */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* NOTE: :active is for when the btn is clicked: */
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #777;
 }
