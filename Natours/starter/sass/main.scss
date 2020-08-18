@@ -1,18 +1,28 @@
 /*
 COLORS:
 */
+
+$color-primary: #55c57a;
+$color-primary-light: #7ed56f;
+$color-primary-dark: #28b485;
+
+$color-grey-dark: #777;
+$color-white: #fff;
+
 /* NOTE: * is the universal selector in CSS, so * {style} would apply to everything */
 *,
 *::after,
 *::before {
   margin: 0;
   padding: 0;
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
 html {
   /* NOTE: it's bad practice to set font-size in px as some users change their default browser font size (default is 16px). Use % instead: */
   /* NOTE: this translates to 0.625*16 = 10 px */
-  font-size: 62.5%; }
+  font-size: 62.5%;
+}
 
 body {
   /* NOTE: font settings are usually inherited by all child elements, so we set them on the body: */
@@ -21,33 +31,44 @@ body {
   /* font-size: 16px; */
   /* NOTE: it means 1.7 times bigger than the pre-defined height: */
   line-height: 1.7;
-  color: #777;
+  color: $color-grey-dark;
   padding: 3rem;
+
   /* NOTE: This removes any padding,margin, etc. when we set the height/width of elements:  */
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 .header {
   height: 95vh;
   /* NOTE: this is how we apply a gradient to our bg image (basically two images on top of each other!): */
   /* NOTE: to right means start from top left and go to bottom right (to set the colors) */
-  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero.jpg);
   /* NOTE: cover means try to cover the whole width of the viewport: */
   background-size: cover;
   /* NOTE: this ensures the bg image stays pinned to the top of the page: */
   background-position: top;
   /* NOTE: because the child element (.logo-box) needs this to be relative (to act as the starting point): */
   position: relative;
+
   /* NOTE: this is a modern css property that let's us cut off elements to get certain shapes: */
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
 
 .header__logo-box {
   /* NOTE: the position start is relative to the parent element (that should have 'position: relative;' set on it): */
   position: absolute;
   top: 4rem;
-  left: 4rem; }
+  left: 4rem;
+}
 
 .header__logo {
-  height: 3.5rem; }
+  height: 3.5rem;
+}
 
 .header__text-box {
   position: absolute;
@@ -56,14 +77,17 @@ body {
   /* NOTE: this is to align the middles (of both axes) of the element to the middle of page - this is relative to the element itself: */
   transform: translate(-50%, -50%);
   /* NOTE: this is used to center the child element (i.e. the button - .btn): */
-  text-align: center; }
+  text-align: center;
+}
 
 .heading-primary {
-  color: #fff;
+  color: $color-white;
   text-transform: uppercase;
+
   /* NOTE: sometimes at the end of animation there is a glitch, this gets rid of that 'bug': */
   backface-visibility: hidden;
-  margin-bottom: 6rem; }
+  margin-bottom: 6rem;
+}
 
 .heading-primary--main {
   /* NOTE: span is inline by default, to break into lines we make it a block element (to take up whole width): */
@@ -71,49 +95,69 @@ body {
   font-size: 6rem;
   font-weight: 400;
   letter-spacing: 3.5rem;
+
   animation-name: moveInLeft;
   animation-duration: 1s;
   animation-timing-function: ease-out;
+
   /* 
   animation-delay: 1s;
   animation-iteration-count: 3;
-  */ }
+  */
+}
 
 .heading-primary--sub {
   display: block;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1.75rem;
-  animation: moveInRight 1s ease-out; }
+  animation: moveInRight 1s ease-out;
+}
 
 /* NOTE: for browser performance, it's best to animate only two properties (as they are optimized for these): 1) Opacity 2) Transform */
 @keyframes moveInLeft {
   0% {
     opacity: 0;
-    transform: translateX(-10rem); }
+    transform: translateX(-10rem);
+  }
+
   80% {
-    transform: translateX(1rem); }
+    transform: translateX(1rem);
+  }
+
   100% {
     opacity: 1;
-    transform: translate(0); } }
+    transform: translate(0);
+  }
+}
 
 @keyframes moveInRight {
   0% {
     opacity: 0;
-    transform: translateX(10rem); }
+    transform: translateX(10rem);
+  }
+
   80% {
-    transform: translateX(-1rem); }
+    transform: translateX(-1rem);
+  }
+
   100% {
     opacity: 1;
-    transform: translate(0); } }
+    transform: translate(0);
+  }
+}
 
 @keyframes moveInBottom {
   0% {
     opacity: 0;
-    transform: translateY(3rem); }
+    transform: translateY(3rem);
+  }
+
   100% {
     opacity: 1;
-    transform: translate(0); } }
+    transform: translate(0);
+  }
+}
 
 /* NOTE: :link and :visited are a special pseudo classes for an anchor element (which our button is here):  */
 .btn:link,
@@ -129,21 +173,25 @@ body {
   transition: all 0.2s;
   /* NOTE: this is used by the ::after pseudo element (.btn::after). This makes .btn the reference element for the pseudo one: */
   position: relative;
-  font-size: 1.6rem; }
+  font-size: 1.6rem;
+}
 
 .btn:hover {
   transform: translateY(-3px);
   /* NOTE: the first value is offset from x-axis, second is offset from y-axis and third is the blur: */
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
 
 /* NOTE: :active is for when the btn is clicked: */
 .btn:active {
   transform: translateY(-1px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
 
 .btn--white {
-  background-color: #fff;
-  color: #777; }
+  background-color: $color-white;
+  color: $color-grey-dark;
+}
 
 /* NOTE: ::after is a pseudo element. We create a btn exactly like the one we have and put it behind our btn: */
 .btn::after {
@@ -159,17 +207,21 @@ body {
   top: 0;
   left: 0;
   z-index: -1;
-  transition: all 0.4s; }
+  transition: all 0.4s;
+}
 
 .btn--white::after {
-  background-color: #fff; }
+  background-color: $color-white;
+}
 
 .btn:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0; }
+  opacity: 0;
+}
 
 .btn--animated {
   /* NOTE: the last value is the delay: */
   animation: moveInBottom 0.5s ease-out 0.75s;
   /* NOTE: the styles at 0% keyframe will be applied (before the animation starts) if we use this: */
-  animation-fill-mode: backwards; }
+  animation-fill-mode: backwards;
+}
