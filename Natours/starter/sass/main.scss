@@ -8,6 +8,7 @@ $color-primary-dark: #28b485;
 
 $color-grey-dark: #777;
 $color-white: #fff;
+$color-black: #000;
 
 /* NOTE: * is the universal selector in CSS, so * {style} would apply to everything */
 *,
@@ -57,27 +58,27 @@ body {
 
   /* NOTE: this is a modern css property that let's us cut off elements to get certain shapes: */
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-}
 
-.header__logo-box {
-  /* NOTE: the position start is relative to the parent element (that should have 'position: relative;' set on it): */
-  position: absolute;
-  top: 4rem;
-  left: 4rem;
-}
+  &__logo-box {
+    /* NOTE: the position start is relative to the parent element (that should have 'position: relative;' set on it): */
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
 
-.header__logo {
-  height: 3.5rem;
-}
+  &__logo {
+    height: 3.5rem;
+  }
 
-.header__text-box {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  /* NOTE: this is to align the middles (of both axes) of the element to the middle of page - this is relative to the element itself: */
-  transform: translate(-50%, -50%);
-  /* NOTE: this is used to center the child element (i.e. the button - .btn): */
-  text-align: center;
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /* NOTE: this is to align the middles (of both axes) of the element to the middle of page - this is relative to the element itself: */
+    transform: translate(-50%, -50%);
+    /* NOTE: this is used to center the child element (i.e. the button - .btn): */
+    text-align: center;
+  }
 }
 
 .heading-primary {
@@ -87,31 +88,31 @@ body {
   /* NOTE: sometimes at the end of animation there is a glitch, this gets rid of that 'bug': */
   backface-visibility: hidden;
   margin-bottom: 6rem;
-}
 
-.heading-primary--main {
-  /* NOTE: span is inline by default, to break into lines we make it a block element (to take up whole width): */
-  display: block;
-  font-size: 6rem;
-  font-weight: 400;
-  letter-spacing: 3.5rem;
+  &--main {
+    /* NOTE: span is inline by default, to break into lines we make it a block element (to take up whole width): */
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
 
-  animation-name: moveInLeft;
-  animation-duration: 1s;
-  animation-timing-function: ease-out;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
 
-  /* 
-  animation-delay: 1s;
-  animation-iteration-count: 3;
-  */
-}
+    /* 
+    animation-delay: 1s;
+    animation-iteration-count: 3;
+    */
+  }
 
-.heading-primary--sub {
-  display: block;
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 1.75rem;
-  animation: moveInRight 1s ease-out;
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    animation: moveInRight 1s ease-out;
+  }
 }
 
 /* NOTE: for browser performance, it's best to animate only two properties (as they are optimized for these): 1) Opacity 2) Transform */
@@ -159,69 +160,71 @@ body {
   }
 }
 
-/* NOTE: :link and :visited are a special pseudo classes for an anchor element (which our button is here):  */
-.btn:link,
-.btn:visited {
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 1.5rem 4rem;
-  /* NOTE: because this element is inline-block, it will be treated as text so we can set text-align on its parent (.text-box) to center it! */
-  display: inline-block;
-  border-radius: 10rem;
-  /* NOTE: transition can be used for simpler animations (for more complex use @keyframes): */
-  /* NOTE: if not sure what properties to animate, use 'all' to animate all possible properties: */
-  transition: all 0.2s;
-  /* NOTE: this is used by the ::after pseudo element (.btn::after). This makes .btn the reference element for the pseudo one: */
-  position: relative;
-  font-size: 1.6rem;
-}
+.btn {
+  /* NOTE: :link and :visited are a special pseudo classes for an anchor element (which our button is here):  */
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    /* NOTE: because this element is inline-block, it will be treated as text so we can set text-align on its parent (.text-box) to center it! */
+    display: inline-block;
+    border-radius: 10rem;
+    /* NOTE: transition can be used for simpler animations (for more complex use @keyframes): */
+    /* NOTE: if not sure what properties to animate, use 'all' to animate all possible properties: */
+    transition: all 0.2s;
+    /* NOTE: this is used by the ::after pseudo element (.btn::after). This makes .btn the reference element for the pseudo one: */
+    position: relative;
+    font-size: 1.6rem;
+  }
 
-.btn:hover {
-  transform: translateY(-3px);
-  /* NOTE: the first value is offset from x-axis, second is offset from y-axis and third is the blur: */
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-}
+  &:hover {
+    transform: translateY(-3px);
+    /* NOTE: the first value is offset from x-axis, second is offset from y-axis and third is the blur: */
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
 
-/* NOTE: :active is for when the btn is clicked: */
-.btn:active {
-  transform: translateY(-1px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-}
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
 
-.btn--white {
-  background-color: $color-white;
-  color: $color-grey-dark;
-}
+  /* NOTE: :active is for when the btn is clicked: */
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
 
-/* NOTE: ::after is a pseudo element. We create a btn exactly like the one we have and put it behind our btn: */
-.btn::after {
-  /* NOTE: content and diplay are MANDATORY for a ::after pseudo element to show on the page! */
-  content: '';
-  display: inline-block;
-  /* NOTE: a pseudo element is kind of treated as the child of the element. Here we set the size to be exactly the same as our btn element: */
-  height: 100%;
-  width: 100%;
-  border-radius: 10rem;
-  /* NOTE: these put the pseudo element behind our element: */
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 0.4s;
-}
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
 
-.btn--white::after {
-  background-color: $color-white;
-}
+    &::after {
+      background-color: $color-white;
+    }
+  }
 
-.btn:hover::after {
-  transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0;
-}
+  /* NOTE: ::after is a pseudo element. We create a btn exactly like the one we have and put it behind our btn: */
+  &::after {
+    /* NOTE: content and diplay are MANDATORY for a ::after pseudo element to show on the page! */
+    content: '';
+    display: inline-block;
+    /* NOTE: a pseudo element is kind of treated as the child of the element. Here we set the size to be exactly the same as our btn element: */
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    /* NOTE: these put the pseudo element behind our element: */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
 
-.btn--animated {
-  /* NOTE: the last value is the delay: */
-  animation: moveInBottom 0.5s ease-out 0.75s;
-  /* NOTE: the styles at 0% keyframe will be applied (before the animation starts) if we use this: */
-  animation-fill-mode: backwards;
+  &--animated {
+    /* NOTE: the last value is the delay: */
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    /* NOTE: the styles at 0% keyframe will be applied (before the animation starts) if we use this: */
+    animation-fill-mode: backwards;
+  }
 }
